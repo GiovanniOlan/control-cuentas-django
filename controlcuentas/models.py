@@ -14,7 +14,7 @@ class Client(models.Model):
     cli_phone = models.CharField(max_length=15)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'client'
         
         
@@ -24,7 +24,7 @@ class CatTypeAccount(models.Model):
     typacc_image = models.ImageField(upload_to='images/cat-type-account')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'cat_type_account'
         
 class Account(models.Model):
@@ -36,7 +36,7 @@ class Account(models.Model):
     acc_fktypeaccount = models.ForeignKey(CatTypeAccount, models.DO_NOTHING, db_column='acc_fktypeaccount')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'account'
 
 
@@ -53,5 +53,5 @@ class Assignments(models.Model):
     assi_fkclient = models.ForeignKey(Client, models.DO_NOTHING, db_column='assi_fkclient')   
     
     class Meta:
-        managed = False
+        managed = True
         db_table = 'assignments'     
