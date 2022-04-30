@@ -16,9 +16,9 @@ MYSQL = {
 MYSQL2 = {
     'default':{
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'concuee',
-        'USER' : 'root',
-        'PASSWORD' : '753963',
+        'NAME' : 'controlcuentas_database',
+        'USER' : 'root1',
+        'PASSWORD' : 'root1',
         'HOST' : 'localhost',
         
     }
