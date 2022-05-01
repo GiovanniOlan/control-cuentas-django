@@ -1,0 +1,58 @@
+{% extends './layouts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/controlcuentas">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">jkashjdka@gmail.com(Netflix)</li>
+    </ol>
+</nav>
+
+<div class="usuario-view pd-20 card-box mb-30">
+
+    <div class="row">
+        <div class="clearfix col-10">
+            <h4 class="text-blue h3 mb-2" style="color: #fff; ">Cuenta De: 884-326-3721</h4>
+        </div>
+        <p class="col-2">
+            <a class="btn btn-primary" href="/usuario/update/1">Actualizar</a>
+            <!-- <a class="btn btn-danger" href="/usuario/delete/1"
+                data-confirm="¿Está seguro de que quieres eliminar este dato? Se eliminará para siempre."
+                data-method="post">Eliminar</a> -->
+        </p>
+    </div>
+
+    <div class="pd-20 card-box mb-30">
+        <table id="w0" class="table table-striped table-bordered detail-view" style="width:80%;">
+            <tbody>
+                <tr>
+                    <th width="20%">ID</th>
+                    <td width="50%">1</td>
+                </tr>
+                <tr>
+                    <th width="20%">Nombre</th>
+                    <td width="50%">Maria</td>
+                </tr>
+                <tr>
+                    <th width="20%">Apellido Paterno</th>
+                    <td width="50%">Hernadez</td>
+                </tr>
+                <tr>
+                    <th width="20%">Apellido Materno</th>
+                    <td width="50%">Jimenez</td>
+                </tr>
+                <tr>
+                    <th width="20%">Estatus</th>
+                    <td width="50%">Activo</td>
+                </tr>
+                <tr>
+                    <th width="20%">User</th>
+                    <td width="50%">3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

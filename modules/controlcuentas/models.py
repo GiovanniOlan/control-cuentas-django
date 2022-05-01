@@ -4,7 +4,7 @@ from django.db import models
 
 class Client(models.Model):
     cli_id = models.AutoField(primary_key=True)
-    cli_name = models.CharField(max_length=25)
+    cli_name = models.CharField(max_length=25, verbose_name="Nombre del cliente")
     cli_phone = models.CharField(max_length=15)
 
     class Meta:
