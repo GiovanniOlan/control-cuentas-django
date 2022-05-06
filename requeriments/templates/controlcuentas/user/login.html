@@ -1,0 +1,67 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<head>
+    {% comment %}
+    <script src="https://kit.fontawesome.com/710e952182.js" crossorigin="anonymous"></script> {% endcomment %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'controlcuentas/templates/assets/img/apple-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'controlcuentas/templates/assets/img/favicon.png' %}">
+    <title>
+        {% block title %} Controlcuentas {% endblock %}
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="{% static 'controlcuentas/templates/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="{% static 'controlcuentas/templates/assets/css/black-dashboard.css' %}" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="{% static 'controlcuentas/templates/assets/demo/demo.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center ">
+            <div class="mt-5  col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
+                <div class="card card-user">
+                    <form  method="post">{% csrf_token %}
+                        <div class="card-body">
+                            <div class="author">
+                                <div class="block block-one"></div>
+                                <div class="block block-two"></div>
+                                <div class="block block-three"></div>
+                                <div class="block block-four"></div>
+                                <img class="avatar" src="{% static 'controlcuentas/upload/images/cat-type-account/netflix-icon.jpg' %}" alt="...">
+                                <h5 class="title h3">Inicia Sesión</h5>
+                            </div>
+                            <div class="form-group">
+                                <label>Número de Teléfono</label>
+                                {% render_field form.username class="form-control" placeholder="Numero De Telefono"%}
+                            </div>
+                            <div class="form-group">
+                                <label>Contraseña</label>
+                                {% render_field form.password class="form-control" placeholder="Ingresa tú correo"%}
+                            </div>
+                            <!-- <div class="form-group">
+                                <label>Nombre de Usuario</label>
+                                {{ form.email}}
+                                <input type="text" class="form-control" placeholder="Company" value="Mike">
+
+
+                            </div> -->
+                        </div>
+                        <div class="card-footer">
+                            
+                            <button type="submit" class="btn btn-fill btn-primary">Iniciar Sesion</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

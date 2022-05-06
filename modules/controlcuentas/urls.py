@@ -9,5 +9,8 @@ urlpatterns = [
     
     path('',views.index, name='index'),
     path('view/<id>',views.view, name='view'),
-    path('agregar-cuenta',views.agregar_cuenta, name='agregar-cuenta')
+    path('agregar-cuenta',views.agregar_cuenta, name='agregar-cuenta'),
+    path('register',views.register, name='agregar-cuenta'),
+    
+    
 ]

@@ -1,11 +1,14 @@
 
 from django.db import models
+from django.conf import settings
+
 
 
 class Client(models.Model):
     cli_id = models.AutoField(primary_key=True)
     cli_name = models.CharField(max_length=25, verbose_name="Nombre del cliente")
     cli_phone = models.CharField(max_length=15)
+    cli_fkuser = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default='')
 
     class Meta:
         managed = True
@@ -28,6 +31,7 @@ class Account(models.Model):
     acc_note = models.TextField()
     acc_status = models.IntegerField()
     acc_fktypeaccount = models.ForeignKey(CatTypeAccount, models.DO_NOTHING, db_column='acc_fktypeaccount')
+    acc_fkuser = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default='')
 
     class Meta:
         managed = True
@@ -45,6 +49,7 @@ class Assignments(models.Model):
     assi_note = models.TextField()
     assi_fkaccount = models.ForeignKey(Account, models.DO_NOTHING, db_column='assi_fkaccount')
     assi_fkclient = models.ForeignKey(Client, models.DO_NOTHING, db_column='assi_fkclient')   
+    assi_fkuser = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default='')
     
     class Meta:
         managed = True
