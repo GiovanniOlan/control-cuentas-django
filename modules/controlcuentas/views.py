@@ -1,37 +1,58 @@
 from datetime import datetime
+from multiprocessing import context
 
 from django.http import HttpResponse
+from django.views.generic import TemplateView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import *
 from modules.controlcuentas.models import *
 from modules.controlcuentas.forms import *
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-import json
 from pprint import pprint
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def index(request):
-    return render(request,'controlcuentas/index.html',{'nombre' : [1,2,], })
+class Index(TemplateView):
+    def get(self, request, *args, **kwargs):
+        path = 'index.html'
+        if request.user.is_authenticated:
+            return render(request,'controlcuentas/index.html',{'nombre' : [1,2,], })
+        else:
+            path = f'/login'
+            
+        return redirect(to=path,) 
 
-def view(request,id):
-    return HttpResponse(id)
-    return render(request,'controlcuentas/view.html')
 
-def agregar_cuenta(request):
+class View(LoginRequiredMixin, TemplateView):
+    login_url = 'login'
+    #login_url = 'login'
+    template_name = 'controlcuentas/view.html'
+class AgregarCliente(LoginRequiredMixin, TemplateView):
+    login_url = 'login'
+    template_name = 'controlcuentas/agregar-cliente.html'
     
-    if request.method == 'POST':
-        cliente = ClientForm(request.POST)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = ClientForm
+        return context
+        
+        
+            #return render(request,'controlcuentas/agregar-cuenta.html',{'form': ClientForm()})
+    def post(self, request, *args, **kwargs):
+        data_client = request.POST.copy()
+        data_client['cli_fkuser'] = request.user.id
+        cliente = ClientForm(data_client)
         if(cliente.is_valid()):
+            #return HttpResponse(cliente)
             cliente = cliente.save()
             print(type(cliente.cli_id))
-            return redirect('/controlcuentas/view/'+str(cliente.cli_id))
-                
+            return redirect(to='view')
         else:
-            return HttpResponse("no")
+            return HttpResponse('Algo salio mal')
+                
             
     
-    return render(request,'controlcuentas/agregar-cuenta.html',{'form': ClientForm()})
 
 def register(request):
     message = ''
@@ -54,3 +75,9 @@ def register(request):
     
     return render(request,'controlcuentas/user/register.html', {'form': UserRegisterForm(),
                                                                 'message': message})
+    
+def all_clients(request):
+    
+    
+    
+    return render(request,'controlcuentas/client/all-clients.html')

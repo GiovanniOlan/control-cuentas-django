@@ -6,6 +6,6 @@ urlpatterns = [
     # path('', include('modules.landingpage.urls')),
     path('', include('modules.controlcuentas.urls')),
     path('admin/', admin.site.urls),
-    path('login/', LoginView.as_view(template_name='controlcuentas/user/login.html'),name='login'),
+    path('login/', LoginView.as_view(template_name='controlcuentas/user/login.html',redirect_authenticated_user=True), name='login'),
     path('logout/', LogoutView.as_view(),name='logout'),
 ]

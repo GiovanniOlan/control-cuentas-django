@@ -10,7 +10,7 @@
         </div>
         <ul class="nav">
             <li>
-                <a href="/controlcuentas/">
+                <a href="{% url 'index' %}">
                     <i class="tim-icons icon-chart-pie-36"></i>
                     <p>Inicio</p>
                 </a>
@@ -19,6 +19,12 @@
                 <a href="/">
                     <i class="tim-icons icon-atom"></i>
                     <p>Cuentas</p>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'all-clients' %}">
+                    <i class="tim-icons icon-atom"></i>
+                    <p>Clientes</p>
                 </a>
             </li>
         </ul>

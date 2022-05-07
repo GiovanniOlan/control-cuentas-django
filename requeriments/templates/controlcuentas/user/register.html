@@ -68,11 +68,12 @@
                             {% if message != '' %}
                                 <p class="h4 text-light bg-danger">{{ message }}</p> 
                             {% endif %}
+                        </div>                        
+                        <div class="card-footer" style="margin-top: -20px">
+                            <button type="submit" class="btn btn-fill btn-primary">Registrate</button>
                         </div>
-                        <div class="card-footer">
-                            
-                            <button type="submit" class="btn btn-fill btn-primary">Iniciar Sesion</button>
-                        </div>
+                        <p >O</p>
+                        <a class="" href="{% url 'login' %}">Inicia Sesión</a>
                     </form>
                 </div>
             </div>
