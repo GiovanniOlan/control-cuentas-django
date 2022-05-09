@@ -1,0 +1,22 @@
+{% load widget_tweaks %}
+
+
+<form method="post">{% csrf_token %}
+    <div class="row w-50">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>{{form.cli_name.label}}</label>
+                {% render_field form.cli_name class="form-control" %}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>{{form.cli_phone.label}}</label>
+                {% render_field form.cli_phone class="form-control"%}
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-fill btn-primary">Guardar</button>
+    </div>
+</form>

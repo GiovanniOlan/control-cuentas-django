@@ -1,0 +1,60 @@
+{% extends '../layouts/main.html' %}
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.11.5/datatables.min.css" />
+
+{% endblock %}
+
+
+{% block content %}
+
+{% block before_content %}{% endblock %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="row card-header">
+                <h4 class="col-6 card-title h2">{% block title_table %}{% endblock %}</h4>
+                <div class="col-6" style="text-align: right;">
+                    <a class=" btn btn-second" href="{% url 'add-client' %}">Agregar Cliente</a>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <div class="table">
+                    <table class="table tablesorter " id="table_id">
+                        <thead class="text-primary">
+                            {% block columns %}
+                            {% endblock %}
+                        </thead>
+                        <tbody>
+                            {% block rows %}
+                            {% endblock %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% block last_content %}{% endblock %}
+
+{% endblock %}\
+
+
+
+{% block script %}
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.11.5/datatables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#table_id').DataTable({
+            responsive: true,
+            autowidth: false,
+        });
+    }); 
+</script>
+{% endblock %}

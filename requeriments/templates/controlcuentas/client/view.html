@@ -1,0 +1,32 @@
+{% extends '../layouts/view.html' %}
+{% load static %}
+
+{% block title %}{{client.cli_name}}{% endblock %}
+{% block url_update %}{% url 'update-client' c.cli_id %}{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'all-clients' %}">Clientes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{client.cli_name}}</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+
+{% block tbody %} 
+    <tr>
+        <th width="20%">ID</th>
+        <td width="50%"> {{client.cli_id}} </td>
+    </tr>
+    <tr>
+        <th width="20%">Nombre</th>
+        <td width="50%"> {{client.cli_name}} </td>
+    </tr>
+    <tr>
+        <th width="20%">ID</th>
+        <td width="50%">{{client.cli_phone}}</td>
+    </tr>
+{% endblock %}

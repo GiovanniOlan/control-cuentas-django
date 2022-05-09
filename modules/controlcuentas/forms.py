@@ -9,6 +9,7 @@ class ClientForm(ModelForm):
     class Meta:
         model = Client
         fields = '__all__'
+        exclude = ['cli_id','cli_fkuser']
         
         
 class UserRegisterForm(UserCreationForm):

@@ -10,8 +10,9 @@ urlpatterns = [
     
     path('',Index.as_view(), name='index'),
     path('index', Index.as_view(), name='index'),
-    path('view', View.as_view(), name='view'),
-    path('agregar-cliente',AgregarCliente.as_view(), name='agregar-cliente'),
+    path('view/<pk>', ViewClient.as_view(), name='view_client'),
+    path('add-client',AddClient.as_view(), name='add-client'),
     path('register',views.register, name='register'),
-    path('all-clients',views.all_clients, name='all-clients'),
+    path('client/all',AllClients.as_view(), name='all-clients'),
+    path('client/update/<pk>',UpdateClient.as_view(), name='update-client'),
 ]

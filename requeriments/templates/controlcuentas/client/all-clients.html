@@ -1,9 +1,38 @@
-{% extends '../layouts/main.html' %}
+{% extends '../layouts/table.html' %}
 
-{% block title %}Clientes{% endblock %}\
+{% block title %}Clientes{% endblock %}
 
-{% block content %}
+{% block title_table %}Clientes{% endblock %}
+{% block columns %}
+    <tr>
+        <th style="width: 45%;">Nombre</th>
+        <th style="width: 45%;">Teléfono</th>
+        <th style="width: 10%;">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block before_content %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+        </ol>
+    </nav>
+{% endblock %}
 
 
-
+{% block rows %}
+    {% for c in object_list %}
+        <tr>
+            <td> {{c.cli_name}} </td>
+            <td> {{c.cli_phone}} </td>
+            <td>
+                <a href="{% url 'view_client' c.cli_id %}"><i class="fas fa-solid fa-eye"></i></a>
+                <a href="{% url 'update-client' c.cli_id %}"><i class="fas fa-edit"></i></a>
+                <a href="{% url 'update-client' pk=c.cli_id %}"><i class="fas fa-trash-alt"></i></a>
+                
+                
+            </td>
+        </tr>
+    {% endfor %}
 {% endblock %}

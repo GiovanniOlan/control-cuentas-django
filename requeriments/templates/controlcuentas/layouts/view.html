@@ -1,0 +1,24 @@
+{% extends '../layouts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+{% block breadcrumb %}{% endblock %}
+
+
+<div class="w-100">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="col-6 card-title h2">{% block title %}{% endblock %}</h4>
+        </div>
+        <div class="card-body ">
+            <table id="w0" class="table table-striped table-bordered detail-view" style="width:80%;">
+                <tbody>
+                    {% block tbody %}{% endblock %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
