@@ -1,0 +1,10 @@
+
+
+#input{
+    background-color: #1e1e2f;
+}
+
+::-webkit-calendar-picker-indicator{
+    font-size: 20px;
+    filter: invert(1);
+}

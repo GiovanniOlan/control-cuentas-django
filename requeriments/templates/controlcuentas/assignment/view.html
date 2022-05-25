@@ -1,0 +1,56 @@
+{% extends '../layouts/view.html' %}
+{% load static %}
+
+{% block title %}{{assi.assi_fkclient}} - {{assi.assi_fkaccount}}{% endblock %}
+{% block url_update %}{% url 'update-client' assi.assi_id %}{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'all-assignments' %}">Asignaciones</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{assi.assi_fkclient}} - {{assi.assi_fkaccount}}</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+
+{% block tbody %} 
+    <tr>
+        <th width="20%">ID</th>
+        <td width="50%"> {{assi.assi_id}} </td>
+    </tr>
+    <tr>
+        <th width="20%">Cuenta</th>
+        <td width="50%"> {{assi.assi_fkaccount}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Perfil</th>
+        <td width="50%">{{assi.assi_profile}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Nota</th>
+        <td width="50%">{{assi.assi_note}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Cliente</th>
+        <td width="50%">{{assi.assi_fkclient}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Dia De Compra</th>
+        <td width="50%">{{assi.assi_datepurchase}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Dia De Renovación</th>
+        <td width="50%">{{assi.assi_daterenovation}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Precio De Compra</th>
+        <td width="50%">{{assi.assi_purchaseprice}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Precio De Venta</th>
+        <td width="50%">{{assi.assi_sellingprice}}</td>
+    </tr>
+{% endblock %}

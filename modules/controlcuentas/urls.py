@@ -10,9 +10,19 @@ urlpatterns = [
     
     path('',Index.as_view(), name='index'),
     path('index', Index.as_view(), name='index'),
+    path('register',views.register, name='register'),
+    #Client
     path('view/<pk>', ViewClient.as_view(), name='view_client'),
     path('add-client',AddClient.as_view(), name='add-client'),
-    path('register',views.register, name='register'),
     path('client/all',AllClients.as_view(), name='all-clients'),
     path('client/update/<pk>',UpdateClient.as_view(), name='update-client'),
+    
+    
+    #Assignments
+    path('assignments/',AllAssignments.as_view(), name='all-assignments'),
+    path('assignments/create',AddAssignment.as_view(), name='add-assignment'),
+    path('assignments/view/<pk>', ViewAssignment.as_view(), name='view_assignment'),
+    path('assignments/update/<pk>',UpdateAssignment.as_view(), name='update_assignment'),
+    
+    
 ]

@@ -16,7 +16,7 @@
             <div class="row card-header">
                 <h4 class="col-6 card-title h2">{% block title_table %}{% endblock %}</h4>
                 <div class="col-6" style="text-align: right;">
-                    <a class=" btn btn-second" href="{% url 'add-client' %}">Agregar Cliente</a>
+                    <a class=" btn btn-second" href="{% block btn_create_url %}{% endblock %}">{% block btn_create_title %}{% endblock %}</a>
                 </div>
 
             </div>

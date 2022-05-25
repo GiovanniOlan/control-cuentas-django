@@ -1,0 +1,56 @@
+{% load widget_tweaks %}
+
+
+<form method="post">{% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>{{form.assi_fkclient.label}}</label>
+                {% render_field form.assi_fkclient class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>{{form.assi_fkaccount.label}}</label>
+                {% render_field form.assi_fkaccount class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>{{form.assi_profile.label}}</label>
+                {% render_field form.assi_profile class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>{{form.assi_purchaseprice.label}}</label>
+                {% render_field form.assi_purchaseprice class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>{{form.assi_sellingprice.label}}</label>
+                {% render_field form.assi_sellingprice class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>{{form.assi_datepurchase.label}}</label>
+                {% render_field form.assi_datepurchase type='date' class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>{{form.assi_note.label}}</label>
+                {% render_field form.assi_note class="form-control" id="input"%}
+            </div>
+        </div>
+        
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-fill btn-primary">Guardar</button>
+    </div>
+</form>

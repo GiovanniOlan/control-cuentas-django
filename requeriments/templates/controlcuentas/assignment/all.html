@@ -1,0 +1,50 @@
+{% extends '../layouts/table.html' %}
+
+{% block title %}Asignaciones{% endblock %}
+
+{% block title_table %}Asignaciones{% endblock %}
+{% block btn_create_title %}Crear Asignación{% endblock %}
+{% block btn_create_url %}{% url 'add-assignment' %}{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th style="width: 10%;">ID</th>
+        <th style="width: 20%;">Cliente</th>
+        <th style="width: 25%;">Cuenta</th>
+        <th style="width: 25%;">Tipo De Cuenta</th>
+        <th style="width: 20%;">Perfil</th>
+        <th style="width: 10%;">Dia De Renovación</th>
+        <th style="width: 5%;">Acciones</th>
+        
+    </tr>
+{% endblock %}
+
+{% block before_content %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Asignaciones</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+{% block rows %}
+    {% for o in object_list %}
+        <tr>
+            <td> {{o.assi_id}} </td>
+            <td> {{o.assi_fkclient}} </td>
+            <td> {{o.assi_fkaccount}} </td>
+            <td> {{o.assi_fkaccount.acc_fktypeaccount}} </td>
+            <td> {{o.assi_profile}} </td>
+            <td> {{o.assi_daterenovation}} </td>
+            <td>
+                <a href="{% url 'view_assignment' o.assi_id %}"><i class="fas fa-solid fa-eye"></i></a>
+                <a href="{% url 'update_assignment' o.assi_id %}"><i class="fas fa-edit"></i></a>
+                {% comment %} <a href="{% url 'view_assignment' pk=c.cli_id %}"><i class="fas fa-trash-alt"></i></a> {% endcomment %}
+                
+                
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

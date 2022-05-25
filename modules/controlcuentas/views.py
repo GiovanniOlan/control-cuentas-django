@@ -1,9 +1,10 @@
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from multiprocessing import context
 
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import View,TemplateView, ListView,UpdateView
+from django.views.generic import View,TemplateView, ListView,UpdateView,CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import *
 from modules.controlcuentas.models import *
@@ -64,29 +65,24 @@ class ViewClient(LoginRequiredMixin, View):
         
         
     
-class AddClient(LoginRequiredMixin, TemplateView):
+class AddClient(LoginRequiredMixin, CreateView):
     login_url = 'login'
+    #model = Client
+    form_class = ClientForm
+    success_url = reverse_lazy('all-clients')
     template_name = 'controlcuentas/client/create.html'
-    extra_context = {'form': ClientForm}
     
-    def post(self, request, *args, **kwargs):
-        data_client = request.POST.copy()
-        data_client['cli_fkuser'] = request.user.id
-        cliente = ClientForm(data_client)
-        if(cliente.is_valid()):
-            #return HttpResponse(cliente)
-            cliente = cliente.save()
-            print(type(cliente.cli_id))
-            return redirect(to='view')
-        else:
-            return HttpResponse('Algo salio mal')
+    def form_valid(self, form):
+        form.instance.cli_fkuser = self.request.user
+        form.save()
+        return super().form_valid(form)
 class AllClients(LoginRequiredMixin,ListView):
     login_url = 'login'
     model = Client
     template_name = 'controlcuentas/client/all-clients.html'
     
     def get_queryset(self):
-        return Client.objects.filter(cli_fkuser=self.request.user.id)
+        return self.model.objects.filter(cli_fkuser=self.request.user.id)
     
 class UpdateClient(LoginRequiredMixin,UpdateView):
     login_url = 'login'
@@ -95,3 +91,54 @@ class UpdateClient(LoginRequiredMixin,UpdateView):
     template_name = 'controlcuentas/client/update.html'
     success_url = reverse_lazy('all-clients')
     
+
+
+#Asignments
+class AllAssignments(LoginRequiredMixin,ListView):
+    login_url = 'login'
+    model = Assignments
+    template_name = 'controlcuentas/assignment/all.html'
+    
+    def get_queryset(self):
+        return self.model.objects.filter(assi_fkuser=self.request.user.id)
+    
+
+class AddAssignment(LoginRequiredMixin,CreateView):
+    login_url = 'login'
+    form_class = AssignmentsForm
+    template_name = 'controlcuentas/assignment/create.html'
+    success_url = reverse_lazy('all-assignments')
+    
+    def form_valid(self, form):
+        form.instance.assi_daterenovation = form.instance.assi_datepurchase + relativedelta(months=1)
+        form.instance.assi_status = 1
+        form.instance.assi_fkuser = self.request.user
+        return super().form_valid(form)
+    
+class ViewAssignment(LoginRequiredMixin, View):
+    model = Assignments
+    login_url = 'login'
+    template_name = 'controlcuentas/assignment/view.html'
+    
+    def get_queryset(self):
+        return self.model.objects.get(assi_id=self.kwargs.get('pk'))
+    
+    def get(self, request, *args, **kwargs):
+        context = {
+            'assi': self.get_queryset()
+        }
+        return render(request,self.template_name,context)
+    
+
+class UpdateAssignment(LoginRequiredMixin,UpdateView):
+    login_url = 'login'
+    model = Assignments
+    form_class = AssignmentsForm
+    template_name = 'controlcuentas/assignment/update.html'
+    success_url = reverse_lazy('all-assignments')
+    
+    def form_valid(self, form):
+        form.instance.assi_daterenovation = form.instance.assi_datepurchase + relativedelta(months=1)
+        return super().form_valid(form)
+    
+

@@ -23,3 +23,13 @@ MYSQL2 = {
         
     }
 }
+MYSQL3 = {
+    'default':{
+        'ENGINE' : 'django.db.backends.mysql',
+        'NAME' : 'cont',
+        'USER' : 'root1',
+        'PASSWORD' : 'root1',
+        'HOST' : 'localhost',
+        
+    }
+}
