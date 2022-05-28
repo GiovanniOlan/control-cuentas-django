@@ -39,13 +39,13 @@ class CatTypeAccount(models.Model):
         return self.typacc_name
         
 class Account(models.Model):
-    acc_id = models.AutoField(primary_key=True)
-    acc_email = models.CharField(max_length=100)
-    acc_password = models.CharField(max_length=100)
-    acc_note = models.TextField()
-    acc_status = models.IntegerField()
-    acc_fktypeaccount = models.ForeignKey(CatTypeAccount, models.DO_NOTHING, db_column='acc_fktypeaccount')
-    acc_fkuser = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default='',db_column='acc_fkuser')
+    acc_id = models.AutoField(primary_key=True, verbose_name='ID')
+    acc_email = models.CharField(max_length=100,verbose_name='Correo')
+    acc_password = models.CharField(max_length=100,verbose_name='Contraseña')
+    acc_note = models.TextField(verbose_name='Nota')
+    acc_status = models.IntegerField(verbose_name='Estatus', choices=((0,'Inactivo'),(1,'Activo')))
+    acc_fktypeaccount = models.ForeignKey(CatTypeAccount, models.DO_NOTHING, db_column='acc_fktypeaccount',verbose_name='Tipo De Cuenta')
+    acc_fkuser = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default='',db_column='acc_fkuser',verbose_name='User')
 
     class Meta:
         managed = True
@@ -53,6 +53,11 @@ class Account(models.Model):
         
     def __str__(self):
         return f'{self.acc_email}({self.acc_fktypeaccount})'
+    
+    def getEstatus(self):
+        return ('Activo' if self.acc_status==1 else 'Inactivo')
+    
+    
 
 
 class Assignments(models.Model):

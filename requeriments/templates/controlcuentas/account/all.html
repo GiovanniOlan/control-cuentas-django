@@ -1,0 +1,47 @@
+{% extends '../layouts/table.html' %}
+
+{% block title %}Cuentas{% endblock %}
+
+{% block title_table %}Cuentas{% endblock %}
+{% block btn_create_title %}Crear Cuenta{% endblock %}
+{% block btn_create_url %}{% url 'create_account' %}{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th style="width: 10%;">ID</th>
+        <th style="width: 20%;">Email</th>
+        <th style="width: 25%;">Nota</th>
+        <th style="width: 25%;">Estatus</th>
+        <th style="width: 20%;">Tipo de Cuenta</th>
+        <th style="width: 20%;">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block before_content %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cuentas</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+{% block rows %}
+    {% for o in object_list %}
+        <tr>
+            <td>{{o.acc_id}}</td>
+            <td>{{o.acc_email}}</td>
+            <td>{{o.acc_note}}</td>
+            <td>{{o.getEstatus}}</td>
+            <td> {{o.acc_fktypeaccount}}</td>
+            <td>
+                <a href="{% url 'view_account' o.acc_id %}"><i class="fas fa-solid fa-eye"></i></a>
+                <a href="{% url 'update_account' o.acc_id %}"><i class="fas fa-edit"></i></a>
+                {% comment %} <a href="{% url 'view_assignment' pk=c.cli_id %}"><i class="fas fa-trash-alt"></i></a> {% endcomment %}
+                
+                
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

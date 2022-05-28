@@ -1,3 +1,5 @@
+from dataclasses import fields
+from pyexpat import model
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -24,7 +26,11 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2',]
         
 
-        
+class AccountForm(ModelForm):
+    class Meta:
+        model = Account
+        fields = '__all__'
+        exclude = ['acc_fkuser']       
     
 
 

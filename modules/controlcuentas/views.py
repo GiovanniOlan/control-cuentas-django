@@ -142,3 +142,43 @@ class UpdateAssignment(LoginRequiredMixin,UpdateView):
         return super().form_valid(form)
     
 
+
+#Account
+class AllAccount(LoginRequiredMixin,ListView):
+    login_url = 'login'
+    model = Account
+    template_name = 'controlcuentas/account/all.html'
+    
+    def get_queryset(self):
+        return self.model.objects.filter(acc_fkuser=self.request.user.id)
+    
+class CreateAccount(LoginRequiredMixin,CreateView):
+    login_url = 'login'
+    form_class = AccountForm
+    template_name = 'controlcuentas/account/create.html'
+    success_url = reverse_lazy('index')
+    
+    def form_valid(self, form):
+        form.instance.acc_fkuser = self.request.user
+        return super().form_valid(form)
+    
+class ViewAccount(LoginRequiredMixin, View):
+    login_url = 'login'
+    model = Account
+    template_name = 'controlcuentas/account/view.html'
+    
+    def get_queryset(self):
+        return self.model.objects.get(acc_id=self.kwargs.get('pk'))
+    
+    def get(self, request, *args, **kwargs):
+        context = {
+            'account': self.get_queryset()
+        }
+        return render(request,self.template_name,context)
+    
+class UpdateAccount(LoginRequiredMixin,UpdateView):
+    login_url = 'login'
+    model = Account
+    form_class = AccountForm
+    template_name = 'controlcuentas/account/update.html'
+    success_url = reverse_lazy('all-assignments')

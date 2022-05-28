@@ -24,5 +24,12 @@ urlpatterns = [
     path('assignments/view/<pk>', ViewAssignment.as_view(), name='view_assignment'),
     path('assignments/update/<pk>',UpdateAssignment.as_view(), name='update_assignment'),
     
+    #Accounts
+    path('account/all',AllAccount.as_view(), name='all_accounts'),
+    path('account/create', CreateAccount.as_view(), name='create_account'),
+    path('account/view/<pk>', ViewAccount.as_view(), name='view_account'),
+    path('account/update/<pk>',UpdateAccount.as_view(), name='update_account'),
+    
+    
     
 ]

@@ -1,0 +1,44 @@
+{% extends '../layouts/view.html' %}
+{% load static %}
+
+{% block title %} {{account}} {% endblock %}
+{% block url_update %}{% url 'update_account' account.acc_id %}{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'all_accounts' %}">Cuentas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{account}}</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+
+{% block tbody %} 
+    <tr>
+        <th width="20%">ID</th>
+        <td width="50%">{{account.acc_id}} </td>
+    </tr>
+    <tr>
+        <th width="20%">Correo</th>
+        <td width="50%"> {{account.acc_email}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Contraseña</th>
+        <td width="50%">{{account.acc_password}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Nota</th>
+        <td width="50%">{{account.acc_note}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Estatus</th>
+        <td width="50%">{{account.getEstatus}}</td>
+    </tr>
+    <tr>
+        <th width="20%">Tipo De Cuenta </th>
+        <td width="50%">{{account.acc_fktypeaccount}}</td>
+    </tr>
+{% endblock %}

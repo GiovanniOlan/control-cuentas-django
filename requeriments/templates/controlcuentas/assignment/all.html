@@ -9,12 +9,10 @@
 {% block columns %}
     <tr>
         <th style="width: 10%;">ID</th>
-        <th style="width: 20%;">Cliente</th>
-        <th style="width: 25%;">Cuenta</th>
-        <th style="width: 25%;">Tipo De Cuenta</th>
-        <th style="width: 20%;">Perfil</th>
+        <th style="width: 30%;">Cliente</th>
+        <th style="width: 30%;">Cuenta</th>
         <th style="width: 10%;">Dia De Renovación</th>
-        <th style="width: 5%;">Acciones</th>
+        <th style="width: 10%;">Acciones</th>
         
     </tr>
 {% endblock %}
@@ -35,8 +33,6 @@
             <td> {{o.assi_id}} </td>
             <td> {{o.assi_fkclient}} </td>
             <td> {{o.assi_fkaccount}} </td>
-            <td> {{o.assi_fkaccount.acc_fktypeaccount}} </td>
-            <td> {{o.assi_profile}} </td>
             <td> {{o.assi_daterenovation}} </td>
             <td>
                 <a href="{% url 'view_assignment' o.assi_id %}"><i class="fas fa-solid fa-eye"></i></a>

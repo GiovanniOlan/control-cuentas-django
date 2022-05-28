@@ -1,0 +1,41 @@
+{% load widget_tweaks %}
+
+
+<form method="post">{% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>{{form.acc_email.label}}</label>
+                {% render_field form.acc_email class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>{{form.acc_password.label}}</label>
+                {% render_field form.acc_password class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>{{form.acc_note.label}}</label>
+                {% render_field form.acc_note class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>{{form.acc_status.label}}</label>
+                {% render_field form.acc_status class="form-control" id="input"%}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>{{form.acc_fktypeaccount.label}}</label>
+                {% render_field form.acc_fktypeaccount class="form-control" id="input"%}
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-fill btn-primary">Guardar</button>
+    </div>
+</form>
