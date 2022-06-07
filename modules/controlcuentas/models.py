@@ -1,6 +1,7 @@
 
 from django.db import models
 from django.conf import settings
+from datetime import datetime, date
 
 
 
@@ -75,4 +76,8 @@ class Assignments(models.Model):
     
     class Meta:
         managed = True
-        db_table = 'assignments'     
+        db_table = 'assignments'    
+        
+    def getRemaining_time(self):
+        dias = (self.assi_daterenovation - date.today()).days
+        return f'{dias} Dia' if dias==1 else f'{dias} Dias'

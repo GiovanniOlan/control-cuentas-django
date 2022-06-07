@@ -13,7 +13,7 @@
 <h5 class="h3" style="color: #fff; font-size:">Cuentas</h5>
 
 <div class="row">
-    {% for i in nombre %}
+    {% for a in assignments %}
         <div class="col-4">
                 <div class="card card-user">
                     <div class="card-body">
@@ -24,22 +24,20 @@
                             <div class="block block-three"></div>
                             <div class="block block-four"></div>
                             <a href="javascript:void(0)">
-                                <img class="avatar" src="{% static 'controlcuentas/upload/images/cat-type-account/netflix-icon.jpg' %}" alt="...">
-                                <h5 class="title h3">Netflix</h5>
+                                <img class="avatar" src="/requeriments/media/{{a.assi_fkaccount.acc_fktypeaccount.typacc_image}}" alt="...">
+                                <h5 class="title h3">{{a.assi_fkaccount.acc_fktypeaccount}}</h5>
                             </a>
                             <p class="description">
-                                994-367-3625
+                                {{a.assi_fkclient}}
                             </p>
-                            <p class="card-description">Vence: 02/05/2022</p>
-                            <p class="card-description" style="color: red">En 5 Dias</p>
+                            <p class="card-description">{{a.assi_daterenovation}}</p>
+                            <p class="card-description" style="color: red">{{a.getRemaining_time}}</p>
                         </div>
                         </p>
                     </div>
                     <div class="card-footer">
                         <div class="button-container">
-                            <button href="javascript:void(0)" class="btn btn-icon btn-round btn-facebook">
-                            <i style="font-size: 30px; text-align: center; text">﫸</i>
-                            </button>
+                            <a href="{% url 'view_assignment' a.assi_id %}" class="btn btn-icon btn-round"><i class="fas fa-solid fa-eye"></i></a>
                             {% comment %} <button href="javascript:void(0)" class="btn btn-icon btn-round btn-twitter">
                                 <i class="fab fa-twitter"></i>
                                 <i class="fas fa-thumbs-up fa-5x" aria-hidden="true"></i>

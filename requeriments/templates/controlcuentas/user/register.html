@@ -58,13 +58,21 @@
                             </div>
 
 
-                            <!-- <div class="form-group">
-                                <label>Nombre de Usuario</label>
-                                {{ form.email}}
-                                <input type="text" class="form-control" placeholder="Company" value="Mike">
+                            <div class="form-group">
+                                {% if form.errors %}
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                        <div class="alert alert-danger">
+                                            <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                                <i class="tim-icons icon-simple-remove"></i>
+                                            </button>
+                                            <span><b> Error - </b> {{error}}</span>
+                                        </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
 
-
-                            </div> -->
                             {% if message != '' %}
                                 <p class="h4 text-light bg-danger">{{ message }}</p> 
                             {% endif %}

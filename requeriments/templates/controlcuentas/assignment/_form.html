@@ -38,7 +38,8 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>{{form.assi_datepurchase.label}}</label>
-                {% render_field form.assi_datepurchase type='date' class="form-control" id="input"%}
+                {% comment %} {% render_field form.assi_datepurchase type='date' class="form-control" id="input"%} {% endcomment %}
+                {{form.assi_datepurchase}}
             </div>
         </div>
         <div class="col-md-12">

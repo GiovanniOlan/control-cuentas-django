@@ -9,8 +9,8 @@ from django.contrib.staticfiles.urls import static
 urlpatterns = [
     
     path('',Index.as_view(), name='index'),
-    path('index', Index.as_view(), name='index'),
-    path('register',views.register, name='register'),
+    path('register',Register.as_view(), name='register'),
+    
     #Client
     path('view/<pk>', ViewClient.as_view(), name='view_client'),
     path('add-client',AddClient.as_view(), name='add-client'),
@@ -23,6 +23,8 @@ urlpatterns = [
     path('assignments/create',AddAssignment.as_view(), name='add-assignment'),
     path('assignments/view/<pk>', ViewAssignment.as_view(), name='view_assignment'),
     path('assignments/update/<pk>',UpdateAssignment.as_view(), name='update_assignment'),
+    
+    
     
     #Accounts
     path('account/all',AllAccount.as_view(), name='all_accounts'),

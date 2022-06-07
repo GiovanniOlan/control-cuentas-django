@@ -19,7 +19,12 @@ class Index(TemplateView):
     def get(self, request, *args, **kwargs):
         path = 'index.html'
         if request.user.is_authenticated:
-            return render(request,'controlcuentas/index.html',{'nombre' : [1,2,], })
+            assignments = Assignments.objects.filter(assi_status=1).order_by('assi_daterenovation')
+            #return self.model.objects.filter(cli_fkuser=self.request.user.id)
+            # for ass in assignments:
+            #     print(vars(ass))
+            
+            return render(request,'controlcuentas/index.html',{'assignments' : assignments, 'now': datetime.now()})
         else:
             path = f'/login'
             
@@ -27,28 +32,48 @@ class Index(TemplateView):
     
     
 
-def register(request):
-    message = ''
-    if request.method == 'POST':
-        form = UserRegisterForm(data=request.POST)
-        # form['is_superuser'] = 0
-        # form['is_active'] = 1
-        # form['date_joined'] = datetime.now()
-        #return HttpResponse(vars(form))
-        if form.is_valid():
-            #form= form.cleaned_data["username"]
-            user = form.save()
-            #messages.success(request, f'El usuario: {username} a sido creado con exito!')
-            #print(form.username)
-            #pprint(form)
-            return redirect(to='/')
-        else:
-            message = f'Los datos no están bien, verifiquelo de nuevo.'
+class Register(CreateView):
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('index')
+    template_name = 'controlcuentas/user/register.html'
+    
+    def form_valid(self, form):
+        form.instance.is_superuser = 0
+        form.instance.is_active = 1
+        form.instance.date_joined =  datetime.now()
+        
+        return super().form_valid(form)
+    
+    # def form_invalid(self, form):
+    #     response = super().form_invalid(form)
+    #     message = f'Error: {form.instance.error_messages}'
+    #     context = {
+    #         'form': self.form_class,
+    #         'message': message
+    #     }
+    #     return render(self.request,self.template_name,context)
+    
+    # message = ''
+    # if request.method == 'POST':
+    #     form = UserRegisterForm(data=request.POST)
+    #     # form['is_superuser'] = 0
+    #     # form['is_active'] = 1
+    #     # form['date_joined'] = datetime.now()
+    #     #return HttpResponse(vars(form))
+    #     if form.is_valid():
+    #         #form= form.cleaned_data["username"]
+    #         user = form.save()
+    #         #messages.success(request, f'El usuario: {username} a sido creado con exito!')
+    #         #print(form.username)
+    #         #pprint(form)
+    #         return redirect(to='/')
+    #     else:
+    #         message = f'Los datos no están bien, verifiquelo de nuevo.'
         
     
-    return render(request,'controlcuentas/user/register.html', {'form': UserRegisterForm(),'message': message})
+    # return render(request,'controlcuentas/user/register.html', {'form': UserRegisterForm(),'message': message})
 
-
+#Client
 class ViewClient(LoginRequiredMixin, View):
     model = Client
     login_url = 'login'
@@ -63,8 +88,6 @@ class ViewClient(LoginRequiredMixin, View):
         }
         return render(request,self.template_name,context)
         
-        
-    
 class AddClient(LoginRequiredMixin, CreateView):
     login_url = 'login'
     #model = Client
@@ -141,6 +164,23 @@ class UpdateAssignment(LoginRequiredMixin,UpdateView):
         form.instance.assi_daterenovation = form.instance.assi_datepurchase + relativedelta(months=1)
         return super().form_valid(form)
     
+    # def get_queryset(self):
+    #     return  self.model.objects.get(assi_id=self.kwargs.get('pk'))
+        #data.assi_datepurchase = data.assi_datepurchase.strftime('%m/%d/%y')
+        # print(data.assi_datepurchase)
+        # return data
+    
+    # def dispatch(self, request, *args, **kwargs):
+    #     self.object = self.get_object();
+    #     pprint(self.object.assi_datepurchase)
+    #     print(self.object.assi_datepurchase)
+    #     self.object.assi_datepurchase = self.object.assi_datepurchase.strftime('%m-%d-%Y')
+    #     # print(vars(self.object))
+        
+    #     # print(datetime.strftime(self.object.assi_datepurchase,'%m-%d-%Y'))
+    #     return super().dispatch(request, *args, **kwargs)
+        
+
 
 
 #Account
